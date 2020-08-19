@@ -1,6 +1,7 @@
  const searchBox = document.getElementById('searchBox') ;
  const result= document.getElementById('show_result') ;
- const singleLyrics = document.getElementById('lyrics') ;
+ const singleLyric = document.getElementById('lyrics') ;
+ 
  
  //Search by song or artist event handler
     function searchSong(){
@@ -51,11 +52,11 @@
     result.addEventListener('click' , function(){
         const getLyrics = document.getElementById('get_lyrics');
 
-        const artist = getLyrics.getAttribute('data-artist') ;
-        const songTitle = getLyrics.getAttribute('data-songtitle') ;
+         const artist = getLyrics.getAttribute('data-artist') ;
+         const songTitle = getLyrics.getAttribute('data-songtitle') ;
 
-           showLyrics(artist , songTitle) ;
-    })
+         showLyrics(artist , songTitle) ;
+      })
 
 
  //Showing lyrics
@@ -66,10 +67,17 @@
 
      const lyrics = data.lyrics ;
   
-     result.innerHTML = `
-        <div class="single-lyrics text-center">
-          <button class="text-white btn go-back">&lsaquo; Go Back</button>
+       singleLyric.innerHTML = `
+        
+          <button id="goBack" class="text-white btn go-back" onclick="goBack()">&lsaquo; Go Back</button>
             <h2 class="text-success">${artist} - ${songTitle}</h2>
             <pre class="lyric text-white"> ${lyrics} </pre>
-        </div>` ;
+        ` ;
+        result.style.display = "none" ;
    }
+
+   //GoBack Button function
+   function goBack() {
+      result.style.display = "block";
+      singleLyric.innerHTML = "";
+  }
